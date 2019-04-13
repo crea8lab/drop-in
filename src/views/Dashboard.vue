@@ -55,47 +55,32 @@
 </template>
 
 <script>
+import db from "@/fb";
+
 export default {
   data() {
     return {
-      projects: [
-        {
-          title: "Design a new website",
-          person: "Code Slow",
-          due: "1st Jan 2020",
-          status: "ongoing"
-        },
-        {
-          title: "Code up the homepage",
-          person: "Chun Li",
-          due: "10th Jan 2019",
-          status: "complete"
-        },
-        {
-          title: "Design video thumbnails",
-          person: "Sy Ryu",
-          due: "7th July 2019",
-          status: "ongoing"
-        },
-        {
-          title: "Create a community forumm",
-          person: "Whiz Byte",
-          due: "20th Oct 2018",
-          status: "overdue"
-        },
-        {
-          title: "Create a newletter post",
-          person: "Code Slow",
-          due: "22 Feb 2019",
-          status: "overdue"
-        }
-      ]
+      projects: []
     };
   },
   methods: {
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     }
+  },
+  created() {
+    db.collection("projects").onSnapshot(res => {
+      const changes = res.docChanges();
+
+      changes.forEach(change => {
+        if (change.type === "added") {
+          this.projects.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          });
+        }
+      });
+    });
   }
 };
 </script>

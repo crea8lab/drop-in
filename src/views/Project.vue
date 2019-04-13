@@ -23,57 +23,32 @@
 </template>
 
 <script>
+import db from "@/fb";
+
 export default {
   data() {
     return {
-      projects: [
-        {
-          title: "Design a new website",
-          person: "Code Slow",
-          due: "1st Jan 2020",
-          status: "ongoing",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae distinctio nobis minus consectetur cupiditate explicabo, vero, nemo totam recusandae laborum eum qui. Distinctio consectetur explicabo fugiat quia laboriosam eum quod!"
-        },
-        {
-          title: "Code up the homepage",
-          person: "Chun Li",
-          due: "10th Jan 2019",
-          status: "complete",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae distinctio nobis minus consectetur cupiditate explicabo, vero, nemo totam recusandae laborum eum qui. Distinctio consectetur explicabo fugiat quia laboriosam eum quod!"
-        },
-        {
-          title: "Design video thumbnails",
-          person: "Sy Ryu",
-          due: "7th July 2019",
-          status: "ongoing",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae distinctio nobis minus consectetur cupiditate explicabo, vero, nemo totam recusandae laborum eum qui. Distinctio consectetur explicabo fugiat quia laboriosam eum quod!"
-        },
-        {
-          title: "Create a community forumm",
-          person: "Whiz Byte",
-          due: "20th Oct 2018",
-          status: "overdue",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae distinctio nobis minus consectetur cupiditate explicabo, vero, nemo totam recusandae laborum eum qui. Distinctio consectetur explicabo fugiat quia laboriosam eum quod!"
-        },
-        {
-          title: "Create a newletter post",
-          person: "Code Slow",
-          due: "22 Feb 2019",
-          status: "overdue",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae distinctio nobis minus consectetur cupiditate explicabo, vero, nemo totam recusandae laborum eum qui. Distinctio consectetur explicabo fugiat quia laboriosam eum quod!"
-        }
-      ]
+      projects: []
     };
   },
   computed: {
     myProjects() {
       return this.projects.filter(project => project.person === "Code Slow");
     }
+  },
+  created() {
+    db.collection("projects").onSnapshot(res => {
+      const changes = res.docChanges();
+
+      changes.forEach(change => {
+        if (change.type === "added") {
+          this.projects.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          });
+        }
+      });
+    });
   }
 };
 </script>
