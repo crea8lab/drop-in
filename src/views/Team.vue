@@ -17,12 +17,14 @@ x<template>
               <div class="grey--text">{{ person.role }}</div>
             </v-card-text>
 
-            <v-card-actions>
-              <v-btn flat color="grey">
-                <v-icon small left>message</v-icon>
-                <span>Message</span>
-              </v-btn>
-            </v-card-actions>
+            <v-layout justify-space-around>
+              <v-card-actions>
+                <v-btn fab flat color="primary">
+                  <v-icon small>message</v-icon>
+                  <!-- <span>Message</span> -->
+                </v-btn>
+              </v-card-actions>
+            </v-layout>
           </v-card>
         </v-flex>
       </v-layout>
