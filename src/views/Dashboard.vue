@@ -4,7 +4,7 @@
 
     <!-- Hold contents in place inside a container -->
     <v-container class="my-5">
-      <v-card flat class="pa-3" v-for="(project, i) in projects" :key="i">
+      <v-card flat v-for="(project, i) in projects" :key="i">
         <v-layout row wrap :class="`pa-3 project ${project.status}`">
           <v-flex xs12 md6>
             <div class="caption grey--text">Project Title</div>
@@ -26,6 +26,7 @@
             <div>{{ project.status }}</div>
           </v-flex>
         </v-layout>
+        <v-divider></v-divider>
       </v-card>
     </v-container>
   </div>
