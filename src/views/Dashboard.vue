@@ -4,6 +4,17 @@
 
     <!-- Hold contents in place inside a container -->
     <v-container class="my-5">
+      <v-layout row class="mb-3">
+        <v-btn small flat color="grey" @click="sortBy('title')">
+          <v-icon left small>folder</v-icon>
+          <span class="caption text-lowercase">by project name</span>
+        </v-btn>
+        <v-btn small flat color="grey" @click="sortBy('person')">
+          <v-icon left small>person</v-icon>
+          <span class="caption text-lowercase">by person</span>
+        </v-btn>
+      </v-layout>
+
       <v-card flat v-for="(project, i) in projects" :key="i">
         <v-layout row wrap :class="`pa-3 project ${project.status}`">
           <v-flex xs12 md6>
@@ -22,8 +33,12 @@
           </v-flex>
 
           <v-flex xs6 sm4 md2>
-            <div class="caption grey--text">Status</div>
-            <div>{{ project.status }}</div>
+            <div class="right">
+              <v-chip
+                small
+                :class="`${project.status} white--text caption my-2`"
+              >{{ project.status }}</v-chip>
+            </div>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
@@ -69,6 +84,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    sortBy(prop) {
+      this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+    }
   }
 };
 </script>
@@ -82,5 +102,14 @@ export default {
 }
 .project.overdue {
   border-left: 4px solid tomato;
+}
+.v-chip.complete {
+  background: #3cd1c2;
+}
+.v-chip.ongoing {
+  background: #ffaa2c;
+}
+.v-chip.overdue {
+  background: #f83e70;
 }
 </style>
