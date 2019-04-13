@@ -16,7 +16,7 @@
     </v-toolbar>
 
     <!-- Navigation Drawer -->
-    <v-navigation-drawer v-model="drawer" app class="indigo">
+    <v-navigation-drawer v-model="drawer" app class="primary">
       <v-list>
         <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-tile-action>
