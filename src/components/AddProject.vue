@@ -73,6 +73,7 @@ export default {
           .then(response => {
             this.loading = false;
             this.dialog = false;
+            this.$emit("projectAdded");
           })
           .catch(e => console.error(e));
       }
