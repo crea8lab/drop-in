@@ -11,9 +11,14 @@
         <v-card-title class="headline grey lighten-2" primary-title>Create New Project</v-card-title>
 
         <v-card-text>
-          <v-form class="px-3">
-            <v-text-field prepend-icon="folder" label="Title" v-model="title"></v-text-field>
-            <v-textarea prepend-icon="edit" label="Information" v-model="content"></v-textarea>
+          <v-form class="px-3" ref="form">
+            <v-text-field prepend-icon="folder" label="Title" v-model="title" :rules="inputRules"></v-text-field>
+            <v-textarea
+              :rules="inputRules"
+              prepend-icon="edit"
+              label="Information"
+              v-model="content"
+            ></v-textarea>
 
             <!-- Date Picker -->
             <v-menu>
@@ -22,8 +27,9 @@
                 slot="activator"
                 label="Due Date"
                 prepend-icon="date_range"
+                :rules="inputRules"
               ></v-text-field>
-              <v-date-picker v-model="due"></v-date-picker>
+              <v-date-picker :rules="inputRules" v-model="due"></v-date-picker>
             </v-menu>
 
             <v-spacer></v-spacer>
@@ -43,12 +49,15 @@ export default {
     return {
       title: "",
       content: "",
-      due: null
+      due: null,
+      inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"]
     };
   },
   methods: {
     submit() {
-      console.log(this.title, this.content);
+      if (this.$refs.form.validate()) {
+        console.log(this.title, this.content);
+      }
     }
   },
   computed: {
