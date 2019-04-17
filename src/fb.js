@@ -3,12 +3,12 @@ import 'firebase/firestore';
 
 // Init Firebase
 const config = {
-	apiKey: 'AIzaSyC0gPYkG7Dfisz0EGu2SgXMgcCiMe8ju90',
-	authDomain: 'drop-in-app.firebaseapp.com',
-	databaseURL: 'https://drop-in-app.firebaseio.com',
-	projectId: 'drop-in-app',
-	storageBucket: 'drop-in-app.appspot.com',
-	messagingSenderId: '899204736409'
+	apiKey: process.env.VUE_APP_API_KEY,
+	authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+	databaseURL: process.env.VUE_APP_DATABASE_URL,
+	projectId: process.env.VUE_APP_PROJECT_ID,
+	storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID
 };
 
 firebase.initializeApp(config);
