@@ -1,4 +1,4 @@
-x<template>
+<template>
   <div class="team">
     <h1 class="subheading grey--text">Team</h1>
 
