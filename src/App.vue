@@ -1,7 +1,9 @@
 <template>
   <v-app class="grey lighten-4">
     <v-content class="mx-4 mb-4">
-      <router-view></router-view>
+      <component :is="layout">
+        <router-view :layout.sync="layout"></router-view>
+      </component>
     </v-content>
   </v-app>
 </template>
@@ -11,7 +13,7 @@ export default {
   name: "App",
   data() {
     return {
-      //
+      layout: "div"
     };
   }
 };
