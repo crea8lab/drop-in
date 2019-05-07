@@ -70,12 +70,14 @@ export default {
 
         db.collection("projects")
           .add(project)
-          .then(response => {
+          .then(() => {
             this.loading = false;
             this.dialog = false;
             this.$emit("projectAdded");
           })
-          .catch(e => console.error(e));
+          .catch(e => {
+            throw new Error(e);
+          });
       }
     }
   },

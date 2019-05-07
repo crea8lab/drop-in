@@ -1,5 +1,8 @@
 <template>
   <v-app class="grey lighten-4">
+    <!-- Check if user is logged in -->
+    <Auth/>
+
     <!-- Navbar here -->
     <Navbar/>
 
@@ -12,12 +15,14 @@
 </template>
 
 <script>
+import Auth from "@/components/Auth";
 import Navbar from "@/components/Navbar";
 
 export default {
   name: "App",
   components: {
-    Navbar
+    Navbar,
+    Auth
   },
   data() {
     return {

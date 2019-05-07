@@ -9,7 +9,7 @@
           <v-card flat class="text-xs-center ma-3">
             <v-responsive class="pt-4">
               <v-avatar size="100" class="grey lighten-2">
-                <v-img :src="`/images/${person.avatar}`"/>
+                <v-img :src="`images${person.avatar}`"/>
               </v-avatar>
             </v-responsive>
             <v-card-text>
