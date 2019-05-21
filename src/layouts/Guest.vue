@@ -1,8 +1,8 @@
 <template>
   <v-app class="grey lighten-4">
-    <!-- <v-container> -->
-    <slot/>
-    <!-- </v-container> -->
+    <v-container>
+      <slot/>
+    </v-container>
   </v-app>
 </template>
 
