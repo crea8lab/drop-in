@@ -6,12 +6,12 @@
           <v-tabs centered color="success" dark icons-and-text>
             <v-tabs-slider color="yellow"></v-tabs-slider>
 
-            <v-tab>
+            <v-tab style="width: 50%">
               Login
               <v-icon>verified_user</v-icon>
             </v-tab>
 
-            <v-tab>
+            <v-tab style="width: 50%">
               Sign Up
               <v-icon>account_box</v-icon>
             </v-tab>
