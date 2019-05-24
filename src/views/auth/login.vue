@@ -18,7 +18,7 @@
 
             <v-tab-item>
               <v-card flat>
-                <h1 class="subheading text-xs-center grey--text px-3 py-2">Provide login credentials</h1>
+                <h1 class="subheading text-xs-center grey--text px-3 pt-4">Provide login credentials</h1>
                 <v-form ref="form" v-model="valid" lazy-validation class="px-5 py-2">
                   <v-text-field
                     v-model="email"
@@ -40,7 +40,7 @@
                     :disabled="!valid"
                     color="success"
                     @click="validate"
-                    class="mt-4"
+                    class="mt-4 mb-3"
                     block
                   >Login</v-btn>
                 </v-form>
@@ -48,7 +48,41 @@
             </v-tab-item>
 
             <v-tab-item>
-              <h1>Register</h1>
+              <v-card flat>
+                <h1 class="subheading text-xs-center grey--text px-3 pt-4">Register a new account</h1>
+                <v-form ref="form" v-model="valid" lazy-validation class="px-5 py-2">
+                  <v-text-field
+                    v-model="username"
+                    :rules="usernameRules"
+                    label="Username"
+                    required
+                    autofocus
+                    prepend-icon="person"
+                  />
+                  <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                    prepend-icon="email"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    :rules="passwordRules"
+                    type="password"
+                    label="Password"
+                    prepend-icon="lock"
+                  ></v-text-field>
+
+                  <v-btn
+                    :disabled="!valid"
+                    color="success"
+                    @click="validate"
+                    class="mt-4 mb-3"
+                    block
+                  >Login</v-btn>
+                </v-form>
+              </v-card>
             </v-tab-item>
           </v-tabs>
         </v-flex>
@@ -68,15 +102,17 @@ export default {
   data: () => ({
     valid: true,
     email: "",
+    username: "",
+    password: "",
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
-    password: "",
     passwordRules: [
       v => !!v || "Password is required"
       // v =>
-    ]
+    ],
+    usernameRules: [v => !!v || "Username is required"]
   }),
   methods: {
     validate() {
