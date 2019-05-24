@@ -4,7 +4,9 @@ import Dashboard from './views/Dashboard.vue';
 import Project from './views/Project.vue';
 import Team from './views/Team.vue';
 import Login from './views/auth/login.vue';
-import store from './store';
+
+import Firebase from 'firebase/app';
+import 'firebase/auth';
 
 Vue.use(Router);
 
@@ -46,8 +48,13 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-	if (requiresAuth) {
+	const currentUser = Firebase.auth().currentUser;
+	console.log(currentUser);
+
+	if (requiresAuth && !currentUser) {
 		next('/auth/login');
+	} else if (requiresAuth && currentUser) {
+		next();
 	} else {
 		next();
 	}

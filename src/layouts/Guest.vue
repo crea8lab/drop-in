@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <v-container>
+    <v-container class="wrapper">
       <slot/>
     </v-container>
   </v-app>
@@ -16,3 +16,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
