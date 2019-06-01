@@ -121,14 +121,14 @@ export default {
           if (this.$refs.form.validate()) {
             console.log(this.password, this.email);
           }
-          this.reset({ type: type });
+          this.reset({ type });
           break;
 
         case "signup":
           if (this.$refs.forms.validate()) {
             console.log(this.username, this.email, this.password);
           }
-          this.reset({ type: type });
+          this.reset({ type });
           break;
 
         default:
