@@ -9,6 +9,23 @@ export default new Vuex.Store({
 		loggedIn: false,
 		user: {}
 	},
-	mutations: {},
-	actions: {}
+	getters: {
+		GET_CURRENT_USER = (state) => state.user
+	},
+	mutations: {
+		LOGIN_EMAIL(state, payload) {
+			state.user = payload
+		},
+		SIGNUP_EMAIL(state, payload) {
+			state.user = payload
+		}
+	},
+	actions: {
+		LOGIN_EMAIL({ commit }) {
+			commit('LOGIN_EMAIL', payload)
+		},
+		SIGNUP_EMAIL({ commit }) {
+			commit('SIGNUP_EMAIL', payload)
+		}
+	}
 });

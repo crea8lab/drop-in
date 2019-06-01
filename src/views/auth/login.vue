@@ -119,14 +119,25 @@ export default {
       switch (type) {
         case "login":
           if (this.$refs.form.validate()) {
-            console.log(this.password, this.email);
+            const userDetails = {
+              password: this.password,
+              email: this.email
+            };
+            console.log(userDetails);
+            this.$store.commit("LOGIN_EMAIL", userDetails);
           }
           this.reset({ type });
           break;
 
         case "signup":
           if (this.$refs.forms.validate()) {
-            console.log(this.username, this.email, this.password);
+            const userDetails = {
+              username: this.username,
+              password: this.password,
+              email: this.email
+            };
+            console.log(userDetails);
+            this.$store.commit("SIGNUP_EMAIL", userDetails);
           }
           this.reset({ type });
           break;
@@ -136,7 +147,6 @@ export default {
       }
     },
     reset({ type }) {
-      console.log(type);
       type === "login" && this.$refs.form.reset();
       type === "signup" && this.$refs.forms.reset();
     }
