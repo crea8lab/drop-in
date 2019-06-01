@@ -39,7 +39,7 @@
                   <v-btn
                     :disabled="!valid"
                     color="success"
-                    @click="validate"
+                    @click="Validate({type: 'login'})"
                     class="mt-4 mb-3"
                     block
                   >Login</v-btn>
@@ -50,7 +50,7 @@
             <v-tab-item>
               <v-card flat>
                 <h1 class="subheading text-xs-center grey--text px-3 pt-4">Register a new account</h1>
-                <v-form ref="form" v-model="valid" lazy-validation class="px-5 py-2">
+                <v-form ref="forms" v-model="valid" lazy-validation class="px-5 py-2">
                   <v-text-field
                     v-model="username"
                     :rules="usernameRules"
@@ -77,7 +77,7 @@
                   <v-btn
                     :disabled="!valid"
                     color="success"
-                    @click="validate"
+                    @click="Validate({type: 'signup'})"
                     class="mt-4 mb-3"
                     block
                   >Login</v-btn>
@@ -115,17 +115,30 @@ export default {
     usernameRules: [v => !!v || "Username is required"]
   }),
   methods: {
-    validate() {
-      // if (this.$refs.form.validate()) {
-      //   this.snackbar = true;
-      // }
+    Validate({ type }) {
+      switch (type) {
+        case "login":
+          if (this.$refs.form.validate()) {
+            console.log(this.password, this.email);
+          }
+          this.reset({ type: type });
+          break;
 
-      console.log(this.password, this.email);
+        case "signup":
+          if (this.$refs.forms.validate()) {
+            console.log(this.username, this.email, this.password);
+          }
+          this.reset({ type: type });
+          break;
 
-      this.reset();
+        default:
+          break;
+      }
     },
-    reset() {
-      this.$refs.form.reset();
+    reset({ type }) {
+      console.log(type);
+      type === "login" && this.$refs.form.reset();
+      type === "signup" && this.$refs.forms.reset();
     }
   }
 };
