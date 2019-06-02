@@ -85,6 +85,13 @@
               </v-card>
             </v-tab-item>
           </v-tabs>
+
+          <v-sheet>
+            <v-snackbar v-model="snackbar" :timeout="timeout" color="error" left bottom>
+              {{ errorMessage }}
+              <v-btn dark flat @click="snackbar = false">Close</v-btn>
+            </v-snackbar>
+          </v-sheet>
         </v-flex>
       </v-layout>
     </v-container>
@@ -112,7 +119,15 @@ export default {
       v => !!v || "Password is required"
       // v =>
     ],
-    usernameRules: [v => !!v || "Username is required"]
+    usernameRules: [v => !!v || "Username is required"],
+
+    // Snackbar
+    snackbar: false,
+    timeout: 4000,
+    errorMessage: null,
+
+    // Check erros
+    globalError: null
   }),
   methods: {
     Validate({ type }) {
@@ -123,7 +138,6 @@ export default {
               password: this.password,
               email: this.email
             };
-            console.log(userDetails);
             this.$store.commit("LOGIN_EMAIL", userDetails);
           }
           this.reset({ type });
@@ -136,7 +150,6 @@ export default {
               password: this.password,
               email: this.email
             };
-            console.log(userDetails);
             this.$store.commit("SIGNUP_EMAIL", userDetails);
           }
           this.reset({ type });
@@ -149,7 +162,18 @@ export default {
     reset({ type }) {
       type === "login" && this.$refs.form.reset();
       type === "signup" && this.$refs.forms.reset();
+    },
+    checkFormSubmitError() {
+      this.globalError = this.$store.getters.GET_ERRORS;
+      if (this.globalError.message) {
+        this.snackbar = true;
+        this.errorMessage = this.globalError.message;
+      }
+      console.log(this.globalError, "login");
     }
+  },
+  beforeUpdate() {
+    this.checkFormSubmitError();
   }
 };
 </script>

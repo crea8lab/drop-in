@@ -4,6 +4,7 @@ import Dashboard from './views/Dashboard.vue';
 import Project from './views/Project.vue';
 import Team from './views/Team.vue';
 import Login from './views/auth/login.vue';
+import store from './store'
 
 import Firebase from 'firebase/app';
 import 'firebase/auth';
@@ -49,7 +50,8 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 	const currentUser = Firebase.auth().currentUser;
-	console.log(currentUser);
+	store.commit('SET_CURRENT_USER', currentUser)
+	// console.log('cureentUser:', currentUser);
 
 	if (requiresAuth && !currentUser) {
 		next('/auth/login');
