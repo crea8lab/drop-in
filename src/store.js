@@ -19,7 +19,6 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		LOGIN_EMAIL(state, payload) {
-			console.log(state)
 			state.loading = true
 			Firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
 				.then(payload => {

@@ -123,7 +123,7 @@ export default {
 
     // Snackbar
     snackbar: false,
-    timeout: 4000,
+    timeout: 6000,
     errorMessage: null,
 
     // Check erros
@@ -165,11 +165,11 @@ export default {
     },
     checkFormSubmitError() {
       this.globalError = this.$store.getters.GET_ERRORS;
-      if (this.globalError.message) {
+      if (this.globalError.code) {
         this.snackbar = true;
         this.errorMessage = this.globalError.message;
+        console.log(this.globalError, "login");
       }
-      console.log(this.globalError, "login");
     }
   },
   beforeUpdate() {
